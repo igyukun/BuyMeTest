@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<config>
+
+    <!-- ========================== -->
+    <!--    WEBDRIVERS DEFINITIONS  -->
+    <!-- ========================== -->
+    <activeBrowser>Chrome</activeBrowser> <!-- update with the name of one of the browsers below -->
+    <Chrome driverName="webdriver.chrome.driver" driverExec="chromedriver.exe"/>
+    <FireFox driverName="webdriver.gecko.driver" driverExec="geckodriver.exe"/>
+    <Opera driverName="webdriver.opera.driver" driverExec="operadriver.exe"/>
+    <Edge driverName="webdriver.edge.driver" driverExec="msedgedriver.exe"/>
+    <IE driverName="webdriver.chrome.driver" driverExec="IEDriverServer.exe"/>
+
+    <!-- ========================== -->
+    <!--           WEBSITE URL      -->
+    <!-- ========================== -->
+    <webSiteURL>https://buyme.co.il</webSiteURL>
+
+    <!-- ========================== -->
+    <!--      SIGNUP PAGE DATA      -->
+    <!-- ========================== -->
+    <signUpPageURL>https://buyme.co.il/?modal=login</signUpPageURL>
+    <firstName>John</firstName>
+    <email>1@a.com</email>
+    <password>abcd1234</password>
+
+    <!-- ========================== -->
+    <!--      VALID ACCOUNT         -->
+    <!-- ========================== -->
+    <signinPageURL>https://buyme.co.il/</signinPageURL>
+    <!--signinPageURL>https://buyme.co.il/?modal=login</signinPageURL-->
+    <validUser>igorkun@gmail.com</validUser>
+    <validPassword>shagon5B</validPassword>
+
+    <!-- ========================== -->
+    <!--      HOME PAGE DATA        -->
+    <!-- ========================== -->
+
+    <!-- ========================== -->
+    <!--    SELECT BUSINESS PAGE    -->
+    <!-- ========================== -->
+    <testPageURL>https://buyme.co.il/search?budget=3&amp;category=22&amp;region=13</testPageURL>
+    <businessPrice>300</businessPrice>
+
+    <!-- ========================== -->
+    <!--      PURCHASING PAGE       -->
+    <!-- ========================== -->
+    <purchasePageURL>https://buyme.co.il/money/398383?price=300</purchasePageURL>
+    <receiverName>Natali my Precious</receiverName>
+    <message>Mad about you</message>
+    <giftImageFile>src/main/resources/gift_image.jpg</giftImageFile>
+    <!--giftImageFile>C:\Users\IGOR\Documents\Studies\QA Experts\Project2_BuyMe\src\main\resources\gift_image.jpg</giftImageFile-->
+    <receiverPhoneNumber>0551234567</receiverPhoneNumber>
+    <senderName>Me Myself</senderName>
+    <senderPhoneNumber>0587654321</senderPhoneNumber>
+
+</config>
