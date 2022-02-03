@@ -25,7 +25,8 @@ import java.time.Duration;
  *      1) opens website using a predefined URL [https://buyme.co.il/money/398383?price=300]
  *      2) creates a test report using Extent API
  *      3) scrolls down to the bottom of the page
- *      4) takes page screenshot and adds it to the Extent report html
+ *      4) takes page screenshot and adds it to the Extent report html stored
+ *         in the src/main/test/extra_reports directory
  *
  * @author  Igor Kun
  * @version 1.0
