@@ -5,6 +5,7 @@ import com.aventstack.extentreports.ExtentTest;
 import com.aventstack.extentreports.MediaEntityBuilder;
 import com.aventstack.extentreports.Status;
 import com.aventstack.extentreports.reporter.ExtentSparkReporter;
+import org.apache.commons.io.FileUtils;
 import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
 import org.testng.annotations.AfterClass;
@@ -13,6 +14,8 @@ import org.testng.annotations.Test;
 import utils.InitWebDriverSingleton;
 import utils.TakeScreenshot;
 
+import java.io.File;
+import java.io.IOException;
 import java.time.Duration;
 
 /**
@@ -61,6 +64,8 @@ public class ChooseGiftScreenScreenshot {
         //generates full report name using current time in ms for uniqueness
         String extentReportName = String.format("%s/testreport_%d.html",
                 extentReportDir, System.currentTimeMillis());
+        //empty extras_reports directory from the previous runs' leftovers
+        emptyExtentReportDir(extentReportDir);
         //init reporter object with given file name
         ExtentSparkReporter htmlReporter = new ExtentSparkReporter(extentReportName);
         // attach reporter
@@ -101,4 +106,12 @@ public class ChooseGiftScreenScreenshot {
         driver.quit();
     }
 
-}
+    private void emptyExtentReportDir(String dir){
+        File f = new File(dir);
+        if (f.isDirectory())
+            try {
+                FileUtils.cleanDirectory(f);
+            }catch (IOException e){
+                e.printStackTrace();
+            }
+    }}
