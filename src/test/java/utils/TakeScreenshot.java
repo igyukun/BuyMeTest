@@ -7,6 +7,13 @@ import org.openqa.selenium.TakesScreenshot;
 import java.io.File;
 import java.io.IOException;
 
+/**
+ *TakeScreenshot class takes the screeenshot of the current screen and returns its absolute path
+ * @author  Igor Kun
+ * @version 1.0
+ * @since   03-Feb-2022
+ */
+
 public class TakeScreenshot {
 
     public static String takeScreenShot(String dir) {

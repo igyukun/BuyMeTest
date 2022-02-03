@@ -13,6 +13,16 @@ import java.net.URL;
 import java.nio.file.Paths;
 import java.time.Duration;
 
+/**
+ * The PurchasingPage class is a class that implements all test cases required to be performed in the
+ * "Sender & Receiver information" page.
+ * It is built using Selenium APIs.
+ *
+ * @author  Igor Kun
+ * @version 1.0
+ * @since   03-Feb-2022
+ */
+
 public class PurchasingPage extends BasePage{
     private WebDriver driver;
     private WebDriverWait wait;
@@ -24,10 +34,8 @@ public class PurchasingPage extends BasePage{
         driver = InitWebDriverSingleton.InitDriver();
         driver.manage().window().maximize();
         driver.manage().timeouts().pageLoadTimeout(Duration.ofSeconds(20));
-
-        //todo comment this out
-        //driver.get(Configurator.getXMLKeyValue("purchasePageURL"));
-        //todo////////////////////
+//todo comment this out for a standalone run
+//      driver.get(Configurator.getXMLKeyValue("purchasePageURL"));
     }
 
     public void clickForOther() {
@@ -42,6 +50,9 @@ public class PurchasingPage extends BasePage{
 
     public void selectOccasion(){
         clickElement(PageLocators.OCCASION_BOX);
+        try{
+            Thread.sleep(100);
+        }catch (InterruptedException e){e.printStackTrace();}
         clickElement(PageLocators.OCCASION_SELECTED);
     }
 
@@ -53,8 +64,7 @@ public class PurchasingPage extends BasePage{
     public void uploadImageFile(){
         String path = ResourceFileLocator.getResourceFileLocation(Constants.IMAGE_FILE);
         uploadFileToElement(PageLocators.FILE_UPLOAD_BTN,path);
-                //uploadFileToElement(PageLocators.FILE_UPLOAD_BTN, Constants.IMAGE_FILE);
-                //Configurator.getXMLKeyValue("giftImageFile"));
+
     }
 
     public void pressContinueButton(){
@@ -98,17 +108,4 @@ public class PurchasingPage extends BasePage{
         clickElement(PageLocators.PAYMENT_BTN);
     }
 
-//    public String getResourceFileLocation(String fileName) {
-//        String filePath;
-//        URL fileUrl = getClass().getClassLoader().getResource(fileName);
-//        try {
-//            filePath = Paths.get(fileUrl.toURI()).toString();
-//        }catch (URISyntaxException e){
-//            e.printStackTrace();
-//            filePath = fileName;
-//        }
-//        return filePath;
-//        //ClassLoader classloader = getClass().getClassLoader();
-//        //return String.valueOf(new File(classloader.getResource(fileName).getFile()));
-//    }
 }

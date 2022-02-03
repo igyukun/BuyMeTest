@@ -10,8 +10,11 @@ import org.openqa.selenium.support.ui.WebDriverWait;
 
 import java.time.Duration;
 
-/*
-Class initializes the Webdriver according to the driver type defined in the config.xml
+/**
+ * Singleton class initializes the Webdriver according to the driver type defined in the config.xml
+ * @author  Igor Kun
+ * @version 1.0
+ * @since   03-Feb-2022
  */
 public class InitWebDriverSingleton {
     private static WebDriver driver;

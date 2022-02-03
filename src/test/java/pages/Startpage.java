@@ -2,11 +2,21 @@ package pages;
 
 import constants.PageLocators;
 import utils.Configurator;
+import utils.GenerateValidEmail;
 import utils.InitWebDriverSingleton;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
 import java.time.Duration;
+/**
+ * The Startpage class is a class that implements all test cases required to be performed in the
+ * "Intro and registration" page.
+ * It is built using Selenium APIs.
+ *
+ * @author  Igor Kun
+ * @version 1.0
+ * @since   03-Feb-2022
+ */
 
 public class Startpage extends BasePage{
     private WebDriver driver;
@@ -33,7 +43,7 @@ public class Startpage extends BasePage{
     }
 
     public void enterEmail(){
-        sendKeysToElement(PageLocators.EMAIL, Configurator.getXMLKeyValue("email"));
+        sendKeysToElement(PageLocators.EMAIL, GenerateValidEmail.generateValidEmail());
     }
 
     public void enterPassword(){
@@ -51,7 +61,7 @@ public class Startpage extends BasePage{
 
     public boolean assertEmail(){
         return getInputFieldContents(PageLocators.EMAIL).equals(
-                Configurator.getXMLKeyValue("email"));
+                GenerateValidEmail.generateValidEmail());
     }
 
     public boolean assertPassword(){

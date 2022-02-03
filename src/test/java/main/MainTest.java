@@ -5,6 +5,7 @@ import com.aventstack.extentreports.ExtentTest;
 import com.aventstack.extentreports.MediaEntityBuilder;
 import com.aventstack.extentreports.Status;
 import com.aventstack.extentreports.reporter.ExtentSparkReporter;
+import org.apache.commons.io.FileUtils;
 import org.testng.Assert;
 import org.testng.annotations.AfterClass;
 import org.testng.annotations.BeforeClass;
@@ -16,7 +17,18 @@ import pages.PurchasingPage;
 import pages.Startpage;
 import utils.TakeScreenshot;
 
-import java.sql.Timestamp;
+import java.io.File;
+import java.io.IOException;
+import java.nio.file.Paths;
+
+
+/**
+ * The MainTest class executes a full test flow required by the project spec.
+ *      It is built using testNG framework and uses Selenium APIs for accessing and manipulating the web elements.
+ * @author  Igor Kun
+ * @version 1.0
+ * @since   03-Feb-2022
+ */
 
 public class MainTest {
 
@@ -24,25 +36,32 @@ public class MainTest {
     private static ExtentReports extent;
     // creates a toggle for the given test, adds all log events under it
     private static ExtentTest test;
-
-    private static String extentReportName;
+    //the directory to store extent report files and its screenshots
     private static String extentReportDir;
+
+
     @BeforeClass
     public void initTest(){
+        //creates extent report directory [CURRENT_WORKING_DIRECTORY]/src/test/reports
         extentReportDir = String.format("%s/src/test/reports", System.getProperty("user.dir"));
+        //generates full report name using current time in ms for uniqueness
+        String extentReportName = String.format("%s/testreport_%d.html",
+                extentReportDir, System.currentTimeMillis());
+        //empty extent report directory from the previous runs leftovers
+        emptyExtentReportDir(extentReportDir);
 
-        extentReportName = String.format("%s/testreport_%d.html",
-                           extentReportDir,System.currentTimeMillis());
+        //init reporter object with given file name
         ExtentSparkReporter htmlReporter = new ExtentSparkReporter(extentReportName);
         // attach reporter
         extent = new ExtentReports();
         extent.attachReporter(htmlReporter);
-        // name your test and add description
+        // create test and add description
         test = extent.createTest("BuyMe website test",
                               "Automated Selenium and TestNG-based test of BuyMe.co.il website");
     }
 
-     @Test(priority = 0)
+
+    @Test(priority = 0)
     public void introAndRegPageTest() {
         test.log(Status.INFO, "Intro and Registration test started");
         try {
@@ -73,7 +92,10 @@ public class MainTest {
                     TakeScreenshot.takeScreenShot(extentReportDir)).build());
             startpage.submitRegisterButton();
             test.log(Status.PASS,"Pressing sign-up button");
-            startpage.findDummyLocator(); //todo to remove - added to check the screenshot
+
+//todo: uncheck for the intentional error generation
+//           startpage.findDummyLocator();
+
         }catch (Exception e){
             test.fail(e.getMessage(),
                     MediaEntityBuilder.createScreenCaptureFromPath
@@ -87,15 +109,17 @@ public class MainTest {
         test.log(Status.INFO, "Home Screen test started");
         try {
             Homepage homepage = new Homepage();
-            test.log(Status.PASS,"Enter Home Page");
-            homepage.clickSigninRegButton();
-            test.log(Status.PASS,"Open sign-in page");
-            homepage.enterSignInUser();
-            test.log(Status.PASS,"Enter signed user name(email)");
-            homepage.enterSignInPassword();
-            test.log(Status.PASS,"Enter signed user password ");
-            homepage.clickSignIn();
-            test.log(Status.PASS,"Click Signin button");
+//todo uncomment for a standalone execution
+//            test.log(Status.PASS,"Enter Home Page");
+//            homepage.clickSigninRegButton();
+//            test.log(Status.PASS,"Open sign-in page");
+//            homepage.enterSignInUser();
+//            test.log(Status.PASS,"Enter signed user name(email)");
+//            homepage.enterSignInPassword();
+//            test.log(Status.PASS,"Enter signed user password ");
+//            homepage.clickSignIn();
+//            test.log(Status.PASS,"Click Signin button");
+//todo
             homepage.selectPrice();
             test.log(Status.PASS,"Pick price point");
             homepage.selectRegion();
@@ -172,9 +196,9 @@ public class MainTest {
             purchasepage.enterSenderNumber();
             test.log(Status.PASS,"Enter a sender phone number");
             Assert.assertTrue(purchasepage.checkSenderName());
-            test.log(Status.PASS,"Assert the correctness of the entered sender name");
+            test.log(Status.PASS,"Assert correctness of the entered sender name");
             Assert.assertTrue(purchasepage.checkSenderNumber());
-            test.log(Status.PASS,"Assert the correctness of the entered sender number",
+            test.log(Status.PASS,"Assert correctness of the entered sender number",
                     MediaEntityBuilder.createScreenCaptureFromPath
                     (TakeScreenshot.takeScreenShot(extentReportDir)).build());
             purchasepage.pushPaymentBButton();
@@ -189,6 +213,16 @@ public class MainTest {
     @AfterClass
     public void finalizeTest(){
         extent.flush();
+    }
+
+    private void emptyExtentReportDir(String dir){
+        File f = new File(dir);
+        if (f.isDirectory())
+            try {
+                FileUtils.cleanDirectory(f);
+            }catch (IOException e){
+                e.printStackTrace();
+            }
     }
 
 }

@@ -4,6 +4,13 @@ import java.net.URISyntaxException;
 import java.net.URL;
 import java.nio.file.Paths;
 
+/**
+ *ResourceFileLocator class returns an absolute path to the file stored in the project "resources" folder
+ * @author  Igor Kun
+ * @version 1.0
+ * @since   03-Feb-2022
+ */
+
 public class ResourceFileLocator {
 
     public static String getResourceFileLocation(String fileName) {
@@ -16,8 +23,5 @@ public class ResourceFileLocator {
             filePath = fileName;
         }
         return filePath;
-        //ClassLoader classloader = getClass().getClassLoader();
-        //return String.valueOf(new File(classloader.getResource(fileName).getFile()));
     }
-
 }

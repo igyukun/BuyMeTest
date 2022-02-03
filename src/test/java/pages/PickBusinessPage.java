@@ -8,9 +8,18 @@ import org.openqa.selenium.support.ui.WebDriverWait;
 
 import java.time.Duration;
 
+/**
+ * The PickBusinessPage class is a class that implements all test cases required to be performed in the Pick Business page.
+ * It is built using Selenium APIs.
+ *
+ * @author  Igor Kun
+ * @version 1.0
+ * @since   03-Feb-2022
+ */
+
 public class PickBusinessPage extends BasePage{
     private WebDriver driver;
-    private WebDriverWait wait;
+    //private WebDriverWait wait;
 
     /*
     Start Page Class Constructor
@@ -20,9 +29,9 @@ public class PickBusinessPage extends BasePage{
         driver.manage().window().maximize();
         driver.manage().timeouts().pageLoadTimeout(Duration.ofSeconds(20));
 
-        //todo: DEBUG. To comment this out
-        //driver.get(Configurator.getXMLKeyValue("testPageURL"));
-        //todo////////////////////
+//todo: DEBUG. To comment this out
+//      driver.get(Configurator.getXMLKeyValue("testPageURL"));
+
     }
 
     public boolean checkURL(){

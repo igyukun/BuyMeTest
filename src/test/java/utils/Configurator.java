@@ -7,6 +7,14 @@ import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
 import java.io.File;
 
+/**
+ * The Configurator class provides an access to the configuration XML file
+ * and provides a possibility to get an XML element text or its attribute value.
+ * @author  Igor Kun
+ * @version 1.0
+ * @since   03-Feb-2022
+ */
+
 public class Configurator {
 
     public static String getXMLKeyValue(String keyName) {

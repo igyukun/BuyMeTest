@@ -21,16 +21,15 @@
     <!-- ========================== -->
     <signUpPageURL>https://buyme.co.il/?modal=login</signUpPageURL>
     <firstName>John</firstName>
-    <email>1@a.com</email>
-    <password>abcd1234</password>
+    <password>aBcd1234@#</password>
 
     <!-- ========================== -->
     <!--      VALID ACCOUNT         -->
     <!-- ========================== -->
     <signinPageURL>https://buyme.co.il/</signinPageURL>
     <!--signinPageURL>https://buyme.co.il/?modal=login</signinPageURL-->
-    <validUser>igorkun@gmail.com</validUser>
-    <validPassword>shagon5B</validPassword>
+    <!--validUser>igorkun@gmail.com</validUser>
+    <validPassword>shagon5B</validPassword-->
 
     <!-- ========================== -->
     <!--      HOME PAGE DATA        -->
@@ -46,8 +45,8 @@
     <!--      PURCHASING PAGE       -->
     <!-- ========================== -->
     <purchasePageURL>https://buyme.co.il/money/398383?price=300</purchasePageURL>
-    <receiverName>Natali my Precious</receiverName>
-    <message>Mad about you</message>
+    <receiverName>Mon amour</receiverName>
+    <message>To my the most significant one!</message>
     <giftImageFile>src/main/resources/gift_image.jpg</giftImageFile>
     <!--giftImageFile>C:\Users\IGOR\Documents\Studies\QA Experts\Project2_BuyMe\src\main\resources\gift_image.jpg</giftImageFile-->
     <receiverPhoneNumber>0551234567</receiverPhoneNumber>

@@ -11,12 +11,26 @@ import java.time.Duration;
 import java.util.List;
 import java.util.NoSuchElementException;
 
+/**
+ * The BasePage class is parent class to be inherited by all pages classes.
+ *      It is built using Selenium APIs, and it provides a single place for accessing and manipulating
+ *      the web elements throughout the project.
+ *
+ * @author  Igor Kun
+ * @version 1.0
+ * @since   03-Feb-2022
+ */
+
 public class BasePage {
     private WebDriver driver;
     private WebDriverWait wait;
 
     public void clickElement(By locator){
         getWebElement(locator,true,false).click();
+    }
+
+    public void clickElement(By locator, boolean isClickable, boolean isVisible){
+        getWebElement(locator,isClickable,isVisible).click();
     }
 
     public void clickElement(WebElement element){
@@ -61,14 +75,9 @@ public class BasePage {
             return element;
     }
 
-    public List<WebElement> getWebElements(By locator){
-        initDriverWait();
-        return wait.until(ExpectedConditions.visibilityOfAllElementsLocatedBy(locator));
-    }
-
     public void initDriverWait(){
         driver = InitWebDriverSingleton.InitDriver();
-        wait = new WebDriverWait(driver, Duration.ofSeconds(10));
+        wait = new WebDriverWait(driver, Duration.ofSeconds(20));
     }
 
 

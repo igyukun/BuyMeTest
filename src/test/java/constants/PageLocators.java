@@ -2,6 +2,13 @@ package constants;
 
 import org.openqa.selenium.By;
 
+/**
+ * The PageLocators class defines a list of web element locators to be used by the project classes.
+ * @author  Igor Kun
+ * @version 1.0
+ * @since   03-Feb-2022
+ */
+
 public class PageLocators {
 
     //==============================================================================================
@@ -43,7 +50,7 @@ public class PageLocators {
     public static final By FOR_OTHER_BTN     = By.cssSelector("div[gtm='למישהו אחר']");
     public static final By RECEIVER_NAME     = By.cssSelector("input[data-parsley-required-message*='מי הזוכה המאושר? יש להשלים את שם המקבל']");
     public static final By OCCASION_BOX      = By.xpath("//form/div[2]/div[2]/label/div/div[1]/span");
-    public static final By OCCASION_SELECTED = By.xpath("//*[contains(text(),'סתם כי בא לי לפנק')]");
+    public static final By OCCASION_SELECTED = By.xpath("//*[contains(text(),'חתונה')]");
     public static final By MESSAGE_TEXT_AREA = By.cssSelector("textarea[placeholder*='כאן כותבים מילים טובות ואיחולים שמחים']");
     public static final By FILE_UPLOAD_BTN   = By.cssSelector("input[accept*='image/png,image/jpeg,video/quicktime,video/mp4,.mov,.qt']");
     public static final By CONTINUE_BTN      = By.cssSelector("button[gtm='המשך']");
@@ -60,7 +67,7 @@ public class PageLocators {
     //==============================================================================================
 
     //==============================================================================================
-    //     Dummy locators
+    //     Dummy locators - to be used to intentionally rise an error
     public static final By DUMMY_LOCATOR    = By.cssSelector("dummy");
 
 }
