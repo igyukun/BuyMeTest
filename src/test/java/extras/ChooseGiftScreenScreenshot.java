@@ -102,11 +102,21 @@ public class ChooseGiftScreenScreenshot {
     }
 
     @AfterClass
+    /**
+     * This method finalizes the test flow, by closing the Extent test report and
+     * quitting the WebDriver.
+     */
     public void endTest(){
         extent.flush();
         driver.quit();
     }
 
+    /**
+     * This method checks if the provided path represent a directory and clears it from all of it contents.
+     * The IOException is caught by the method and exception StackTrace is printed ito the
+     * standard output device (console)
+     * @param dir generated random email for creating new user.
+     */
     private void emptyExtentReportDir(String dir){
         File f = new File(dir);
         if (f.isDirectory())

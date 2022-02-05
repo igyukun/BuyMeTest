@@ -89,6 +89,9 @@ public class EmptyCredentialsError {
         }
 
         @AfterClass
+        /**
+         * This method finalizes the test flow, by quitting the WebDriver.
+         */
         public void endTest(){
             driver.quit();
         }

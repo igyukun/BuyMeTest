@@ -11,10 +11,8 @@ import org.testng.annotations.AfterClass;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
 
-import pages.Homepage;
-import pages.PickBusinessPage;
-import pages.PurchasingPage;
-import pages.Startpage;
+import pages.*;
+import utils.InitWebDriverSingleton;
 import utils.TakeScreenshot;
 
 import java.io.File;
@@ -24,7 +22,10 @@ import java.nio.file.Paths;
 
 /**
  * The MainTest class executes a full test flow required by the project spec.
- *      It is built using testNG framework and uses Selenium APIs for accessing and manipulating the web elements.
+ *      It is built using testNG framework and uses Selenium APIs for accessing
+ *      and manipulating the web elements.
+ *      Each test represents a set of actions on every specific page, according
+ *      to a mission definition.
  * @author  Igor Kun
  * @version 1.0
  * @since   03-Feb-2022
@@ -32,7 +33,7 @@ import java.nio.file.Paths;
 
 public class MainTest {
 
-    // create ExtentReports and attach reporter(s)
+    // define ExtentReports to attach reporters
     private static ExtentReports extent;
     // creates a toggle for the given test, adds all log events under it
     private static ExtentTest test;
@@ -41,6 +42,11 @@ public class MainTest {
 
 
     @BeforeClass
+    /**
+     * This method is executed first before any other test case.
+     * It initialises Extent reporting objects and defines a directory and a full path
+     * to the test report html file
+     */
     public void initTest(){
         //creates extent report directory [CURRENT_WORKING_DIRECTORY]/src/test/reports
         extentReportDir = String.format("%s/src/test/reports", System.getProperty("user.dir"));
@@ -49,7 +55,6 @@ public class MainTest {
                 extentReportDir, System.currentTimeMillis());
         //empty extent report directory from the previous runs leftovers
         emptyExtentReportDir(extentReportDir);
-
         //init reporter object with given file name
         ExtentSparkReporter htmlReporter = new ExtentSparkReporter(extentReportName);
         // attach reporter
@@ -62,6 +67,16 @@ public class MainTest {
 
 
     @Test(priority = 0)
+    /**
+     * This method executes actions on the Intro and Registration page
+     * It uses the "Startpage" class methods to test the registration and
+     * the sign-in flow.
+     * Every step is registered in extent the test report file as PASS if passed
+     * successfully. In case one of the test fails, the general Exception is caught
+     * and it is written into the report as FAIL with addition of screenshot.
+     * @exception Exception On any exception thrown during the execution .
+     * @see Exception
+     */
     public void introAndRegPageTest() {
         test.log(Status.INFO, "Intro and Registration test started");
         try {
@@ -87,24 +102,37 @@ public class MainTest {
             test.log(Status.PASS,"Password input correctness asserted");
             Assert.assertTrue(startpage.assertPasswordValidation());
             test.log(Status.PASS,"Password validation input correctness asserted");
+            //Taking the screenshot of the page before pressing the "Register" button.
             test.log(Status.INFO, "Current page state screenshot",
                     MediaEntityBuilder.createScreenCaptureFromPath(
                     TakeScreenshot.takeScreenShot(extentReportDir)).build());
             startpage.submitRegisterButton();
             test.log(Status.PASS,"Pressing sign-up button");
 
-//todo: uncheck for the intentional error generation
-//           startpage.findDummyLocator();
+            //todo: unccomment for the intentional error generation
+            //           startpage.findDummyLocator();
 
         }catch (Exception e){
+            //Report the test as FAIL and save a screenshot in the case of a failure
             test.fail(e.getMessage(),
                     MediaEntityBuilder.createScreenCaptureFromPath
                     (TakeScreenshot.takeScreenShot(extentReportDir)).build());
+            //Throw an exception to activate TestNG failure response
             throw e;
         }
     }
 
     @Test (priority = 1)
+    /**
+     * This method executes actions on the Home page
+     * It uses the "Homepage" class methods to test the filtering of the gifts by three criteria:
+     * price, region and category.
+     * Every step is registered in extent the test report file as PASS if passed
+     * successfully. In case one of the test fails, the general Exception is caught
+     * and it is written into the report as FAIL with addition of screenshot.
+     * @exception Exception On any exception thrown during the execution .
+     * @see Exception
+     */
     public void homePageTest(){
         test.log(Status.INFO, "Home Screen test started");
         try {
@@ -126,24 +154,41 @@ public class MainTest {
             test.log(Status.PASS,"Pick region");
             homepage.selectCategory();
             test.log(Status.PASS,"Pick category");
+            //Taking the screenshot of the page before pressing the "Search" button.
             test.log(Status.INFO, "Current page state screenshot",
                     MediaEntityBuilder.createScreenCaptureFromPath(
                     TakeScreenshot.takeScreenShot(extentReportDir)).build());
             homepage.submitPresentSearch();
             test.log(Status.PASS,"Press 'תמצאו לי מתנה'");
         }catch (Exception e){
+            //Report the test as FAIL and save a screenshot in the case of a failure
             test.fail(e.getMessage(),
                     MediaEntityBuilder.createScreenCaptureFromPath(
                     TakeScreenshot.takeScreenShot(extentReportDir)).build());
+            //Throw an exception to activate TestNG failure response
             throw e;
         }
     }
 
     @Test (priority = 2)
+    /**
+     * This method executes actions on the PickBusiness page
+     * It uses the "PickBusinessPage" class methods to do the following actions:
+     * 1) Check that the page URL generated correctly according to the criteria selected in the Home page
+     * 2) Pick a Business card
+     * 3) Enter a gift price
+     * 4) Submit the selection
+     * Every step is registered in extent the test report file as PASS if passed
+     * successfully. In case one of the test fails, the general Exception is caught
+     * and it is written into the report as FAIL with addition of screenshot.
+     * @exception Exception On any exception thrown during the execution .
+     * @see Exception
+     */
     public void pickBusinessPageTest(){
         test.log(Status.INFO, "Pick business screen test started");
         try {
             PickBusinessPage pickbusiness = new PickBusinessPage();
+            //Check that the page URL generated correctly according to the criteria selected in the Home page
             Assert.assertTrue(pickbusiness.checkURL());
             test.log(Status.PASS,"Checked the URL generated according to " +
                                         "the selections made on previous page");
@@ -159,14 +204,28 @@ public class MainTest {
                     MediaEntityBuilder.createScreenCaptureFromPath
                     (TakeScreenshot.takeScreenShot(extentReportDir)).build());
         }catch (Exception e){
+            //Report the test as FAIL and save a screenshot in the case of a failure
             test.fail(e.getMessage(),
                     MediaEntityBuilder.createScreenCaptureFromPath
                     (TakeScreenshot.takeScreenShot(extentReportDir)).build());
+            //Throw an exception to activate TestNG failure response
             throw e;
         }
     }
 
     @Test (priority = 3)
+    /**
+     * This method executes actions on the Purchasing page
+     * It uses the "PurchasingPage" class methods to perform the following:
+     * 1) Fill receiver details
+     * 2) Pick a sender details
+     * 3) Assert entered sender's details correctness
+     * Every step is registered in extent the test report file as PASS if passed
+     * successfully. In case one of the test fails, the general Exception is caught
+     * and it is written into the report as FAIL with addition of screenshot.
+     * @exception Exception On any exception thrown during the execution .
+     * @see Exception
+     */
     public void purchasePageTest() throws Exception{
         test.log(Status.INFO, "Sender & Receiver (purchasing) screen test started");
         try {
@@ -201,24 +260,41 @@ public class MainTest {
             test.log(Status.PASS,"Assert correctness of the entered sender number",
                     MediaEntityBuilder.createScreenCaptureFromPath
                     (TakeScreenshot.takeScreenShot(extentReportDir)).build());
-            purchasepage.pushPaymentBButton();
+            purchasepage.pushPaymentButton();
         }catch (Exception e){
+            //Report the test as FAIL and save a screenshot in the case of a failure
             test.fail(e.getMessage(),
                     MediaEntityBuilder.createScreenCaptureFromPath
                     (TakeScreenshot.takeScreenShot(extentReportDir)).build());
+            //Throw an exception to activate TestNG failure response
             throw e;
         }
     }
 
     @AfterClass
+    /**
+     * This method finalizes the test flow, by closing the Extent test report and
+     * quitting the WebDriver.
+     */
     public void finalizeTest(){
+        //close extent test report to generate HTML report file
         extent.flush();
+        //Get the driver static instance and call its quit() method
+        InitWebDriverSingleton.InitDriver().quit();
     }
 
+    /**
+     * This method checks if the provided path represent a directory and clears it from all of it contents.
+     * The IOException is caught by the method and exception StackTrace is printed ito the
+     * standard output device (console)
+     * @param dir generated random email for creating new user.
+     */
     private void emptyExtentReportDir(String dir){
         File f = new File(dir);
+        //Check if the File object is representing a directory.
         if (f.isDirectory())
             try {
+                //Attempt to clear directory's contents
                 FileUtils.cleanDirectory(f);
             }catch (IOException e){
                 e.printStackTrace();
