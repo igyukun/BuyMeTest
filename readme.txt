@@ -11,6 +11,9 @@ The browser type can be selected by changing <activeBrowser> element value to on
 4) Edge
 5) IE
 
+All drivers executables were added to the project root folder and can be downloaded with the project. Alternatively,
+it is possible to update "driverExec" attribute of the relevant driver in the configuration file src/main/resources/config.xml.
+
 Extent HTML report is stored in the src/test/reports folder. It is getting cleared from its contents before
 every test execution.
 
